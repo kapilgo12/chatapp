@@ -1,19 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 class MessageBubble extends StatelessWidget {
 
   String msg;
   String userId;
   bool isMe;
   String userImage;
+  int time;
 
 
-  MessageBubble(this.msg,this.userId,this.userImage,this.isMe);
+  MessageBubble(this.msg,this.userId,this.userImage,this.isMe,this.time);
 
 
   @override
   Widget build(BuildContext context) {
+    String date="";
+    if(time!=null){
+      date=DateFormat('hh:mm aa').format(DateTime.fromMicrosecondsSinceEpoch(time*1000));
+    }
+
+
     return Stack(
       children: <Widget>[
         Row(
@@ -55,7 +63,8 @@ class MessageBubble extends StatelessWidget {
                           fontSize: 30
                       ),),
 
-                    )
+                    ),
+                    Text(date,style: TextStyle(fontWeight: FontWeight.bold),),
                   ],
                 );
               },

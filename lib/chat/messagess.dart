@@ -35,12 +35,13 @@ class Messages extends StatelessWidget {
                   itemBuilder: (ctx, index) => MessageBubble(
                       chatSnapshot[index]['text'] ?? "",
                       chatSnapshot[index]['usedId'],
-
                       chatSnapshot[index]['userImage'],
-                      chatSnapshot[index]['usedId'] == futuresnapShot.data.uid),
+                      chatSnapshot[index]['usedId'] == futuresnapShot.data.uid,
+                      chatSnapshot[index]['time']),
+
+
                 );
               });
         });
   }
 }
-

@@ -19,9 +19,8 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLoading = false;
   AuthResult authResult;
 
-
-  void _submitAuthForm(String email, String passWord, String username,File pickedimage,
-      bool isLogin, BuildContext ctx) async {
+  void _submitAuthForm(String email, String passWord, String username,
+      File pickedimage, bool isLogin, BuildContext ctx) async {
     try {
       setState(() {
         _isLoading = true;
@@ -39,14 +38,12 @@ class _AuthScreenState extends State<AuthScreen> {
             .child(authResult.user.uid + ".jpg");
         await ref.putFile(pickedimage).onComplete;
 
-        final url=await ref.getDownloadURL();
+        final url = await ref.getDownloadURL();
 
         Firestore.instance
             .collection('users')
             .document(authResult.user.uid)
-            .setData({'username': username, 'email': email,'image_url':url});
-
-
+            .setData({'username': username, 'email': email, 'image_url': url});
       }
     } on PlatformException catch (error) {
       var message = "Error Occured!!,Please Check your Credentials";
